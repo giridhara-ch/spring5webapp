@@ -2,13 +2,15 @@ package com.example.spring5webapp.domain;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
+
     private String firstName;
     private String lastName;
 
@@ -40,21 +42,12 @@ public class Author {
 
         Author author = (Author) o;
 
-        return id == author.id;
+        return Objects.equals(id, author.id);
     }
 
     @Override
     public int hashCode() {
-        return (int) (id ^ (id >>> 32));
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public Author setFirstName(String firstName) {
-        this.firstName = firstName;
-        return this;
+        return id != null ? id.hashCode() : 0;
     }
 
     public String getLastName() {
