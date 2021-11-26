@@ -1,0 +1,76 @@
+package com.example.spring5webapp.domain;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+public class Author {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private String firstName;
+    private String lastName;
+
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books;
+
+    public Author() {
+    }
+
+    public Author(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", books=" + books +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Author author = (Author) o;
+
+        return id == author.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public Author setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Author setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public Author setBooks(Set<Book> books) {
+        this.books = books;
+        return this;
+    }
+}
